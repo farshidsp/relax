@@ -39,7 +39,7 @@ def clip_cast(val, dtype):
 
 # Return True if given Tensor is scalar constant value.
 def is_constant(tensor: te.Tensor):
-    return tensor.ndim == 0 and (
+    return tensor.ndim == 0 and (hasattr(tensor.op, 'body') and
         isinstance(tensor.op.body[0], (tvm.tir.expr.FloatImm, tvm.tir.expr.IntImm))
     )
 
